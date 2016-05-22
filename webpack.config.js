@@ -31,6 +31,9 @@ module.exports = {
             },
         ],
     },
+    externals: {
+        "jquery": "jQuery"
+    },
     watch: true,
     quiet: true
 };
