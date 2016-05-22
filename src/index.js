@@ -5,22 +5,27 @@ import {registrationForm} from './views/index';
 // import UserCollection from './collection/UsersCollection'
 // window.User = User;
 
-function addListenerFunc () {
-
-
-}
+let form = {};
 
 function showForm() {
     // var users = new UserCollection();
     // users.url = 'http://jsonplaceholder.typicode.com/todos';
-    console.log('232423423');
+
+    function addCloseEvent() {
+        var closePopupBtn  = document.querySelector('#registration_modal .close');
+        closePopupBtn.addEventListener('click',function () {
+            form.remove();
+        })
+    }
 
     var registrBtn = document.querySelector('#register_btn');
-    console.log(registrBtn);
     registrBtn.addEventListener('click', function () {
-        const form = new registrationForm({});
+        form = new registrationForm({});
         form.render();
+        $(document.body).append(form.$el);
+        addCloseEvent();
     });
+
 
     // const view = new Form({collection: users, el: '.userList' });
 }

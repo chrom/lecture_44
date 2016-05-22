@@ -3,3 +3,8 @@
     opacity: 1;
     top: 50px;
 }
+
+input.validation-error {
+    border: 1px solid red;
+    color: red;
+}
