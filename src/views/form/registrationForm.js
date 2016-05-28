@@ -3,12 +3,16 @@ import template from 'lodash/template';
 import viewTemplate from './registrationForm.html';
 import styles from './registrationForm.css';
 import styleHelper from '../../helper/style';
+import popupManager from '../../helper/popup';
 
-const BackboneView = View.extend({
+const RegistrationView = View.extend({
     template  : template(viewTemplate),
 
     initialize: function () {
-
+        this.promise = new Promise((resolve, reject) => {
+            this.resolveF = resolve;
+            this.rejectF = reject;
+        });
     },
 
     events: {
@@ -89,10 +93,10 @@ const BackboneView = View.extend({
                     xhrRegister.send(JSON.stringify(registerData));
                     xhrRegister.onreadystatechange = () => {
                         if (xhrRegister.readyState !== xhrRegister.DONE) return;
-                        if (xhrRegister.status === 200) {
-                            this.remove();
-                            alert('User has been registered');
-                        }
+                    }
+                    if (xhrRegister.status === 200) {
+                        this.resolveF();
+                        this.remove();
                     }
                 }
             }
@@ -111,4 +115,4 @@ const BackboneView = View.extend({
     },
 });
 
-export default BackboneView;
+export default RegistrationView;

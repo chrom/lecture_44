@@ -2,6 +2,7 @@
 import {Router, history} from 'backbone';
 // import User Userfrom './models/User';
 import {registrationForm} from './views/index';
+import {openRegistrationPopup} from '../src/helper/popup';
 // import UserCollection from './collection/UsersCollection'
 // window.User = User;
 
@@ -15,14 +16,13 @@ function showForm() {
         var closePopupBtn  = document.querySelector('#registration_modal .close');
         closePopupBtn.addEventListener('click',function () {
             form.remove();
-        })
+        });
     }
 
     var registrBtn = document.querySelector('#register_btn');
     registrBtn.addEventListener('click', function () {
-        form = new registrationForm({});
-        form.render();
-        $(document.body).append(form.$el);
+        console.log(openRegistrationPopup);
+        openRegistrationPopup().then(res => {console.log(res);});
         addCloseEvent();
     });
 
